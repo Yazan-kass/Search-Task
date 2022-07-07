@@ -2,15 +2,23 @@ import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
+import { useState } from "react";
 import Typography from "@mui/material/Typography";
-import MenuIcon from "@mui/icons-material/Menu";
+import Label from "../Label/label";
 import SearchIcon from "@mui/icons-material/Search";
 import { Search, SearchIconWrapper, StyledInputBase } from "./hero.Styles";
-export default function SearchAppBar(props) {
-  const onChangHandler = (e) => {
-    props.onChang(e.target.value);
+export default function SearchAppBar({ handle_Change }) {
+  const handleChange = (e) => {
+    handle_Change(e.target.value);
+    setCount(3);
   };
+  let [count, setCount] = useState(3);
+
+  {
+    setTimeout(function () {
+      if (count != 0) setCount(count - 1);
+    }, 1000);
+  }
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ backgroundColor: "black" }}>
@@ -30,10 +38,11 @@ export default function SearchAppBar(props) {
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ "aria-label": "search" }}
-              value={props.value}
-              onChange={onChangHandler}
+              value={handle_Change.value}
+              onChange={handleChange}
             />
           </Search>
+          <Label counter={count} />
         </Toolbar>
       </AppBar>
     </Box>

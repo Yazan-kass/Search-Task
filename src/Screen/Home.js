@@ -16,7 +16,9 @@ const Home = () => {
     setGif([...response.data.data]);
   });
   useEffect(() => {
-    fetchData();
+    setTimeout(function () {
+      fetchData();
+    }, 3000);
   }, [search]);
   const onChangHandler = (e) => {
     setSearch(e);
@@ -25,7 +27,7 @@ const Home = () => {
   return (
     <div>
       <SearchAppBar
-        onChang={onChangHandler}
+        handle_Change={onChangHandler}
         value={search}
         setValue={setSearch}
       />
